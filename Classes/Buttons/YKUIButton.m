@@ -568,6 +568,7 @@
   UIFont *font = self.titleFont;
 
   NSString *title = _title;
+  _titleSize = [self _sizeForTitle:_title constrainedToSize:rect.size];
   CGSize titleSize = _titleSize;
 
   // Check if we need to use abbreviated title
