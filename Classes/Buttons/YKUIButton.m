@@ -188,7 +188,12 @@
   UIEdgeInsets titleInsets = [self _titleInsets];
   y += titleInsets.top;
 
-  if (_title) {
+  // If the title is nil, but _titleSize hasn't been updated yet
+  // Happens when the title gets changed from non-nil to nil.
+  if (!YKCGSizeIsZero(_titleSize) && !_title) {
+    _titleSize = CGSizeZero;
+    _abbreviatedTitleSize = CGSizeZero;
+  } else if (_title) {
     CGSize constrainedToSize = size;
     // Subtract insets
     constrainedToSize.width -= (titleInsets.left + titleInsets.right);
@@ -568,7 +573,6 @@
   UIFont *font = self.titleFont;
 
   NSString *title = _title;
-  _titleSize = [self _sizeForTitle:_title constrainedToSize:rect.size];
   CGSize titleSize = _titleSize;
 
   // Check if we need to use abbreviated title
