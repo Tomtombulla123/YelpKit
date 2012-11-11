@@ -32,7 +32,7 @@
 
 @implementation YKUIListView
 
-@synthesize lineSeparatorColor=_lineSeparatorColor, topBorderColor=_topBorderColor, lineInsets=_lineInsets, insets=_insets;
+@synthesize lineSeparatorColor=_lineSeparatorColor, topBorderColor=_topBorderColor, lineInsets=_lineInsets, insets=_insets, bottomBorderColor=_bottomBorderColor;
 
 - (void)sharedInit {
   [super sharedInit];
@@ -187,6 +187,10 @@
 
       y += 1;
     }
+  }
+  
+  if (_bottomBorderColor) {
+    YKCGContextDrawLine(context, _lineInsets.left, y + _lineInsets.bottom  - 0.5, self.frame.size.width - _lineInsets.right, y + _lineInsets.bottom - 0.5, _lineSeparatorColor.CGColor, 1.0);
   }
 }
 
